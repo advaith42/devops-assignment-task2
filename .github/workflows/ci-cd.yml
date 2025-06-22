@@ -20,7 +20,7 @@ jobs:
         java-version: '17'
 
     - name: Build with Maven
-      run: mvn clean package -DskipTests
+      run: mvn -f microservice/pom.xml clean package -DskipTests
 
     - name: Docker Login
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
