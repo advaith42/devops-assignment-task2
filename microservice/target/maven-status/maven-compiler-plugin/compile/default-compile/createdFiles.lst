@@ -1,0 +1,4 @@
+com\example\productcatalogue\controller\ProductController.class
+com\example\productcatalogue\model\Product.class
+com\example\productcatalogue\repository\InMemoryProductRepository.class
+com\example\productcatalogue\ProductCatalogueApplication.class

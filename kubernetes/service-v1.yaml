@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-v1-service
+  namespace: product-v1
+spec:
+  selector:
+    app: product-v1
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

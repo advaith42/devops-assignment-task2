@@ -1,0 +1,40 @@
+
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+
+    - name: Docker Login
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t your-dockerhub-username/product-catalogue:v1.0.0 .
+
+    - name: Push Docker image
+      run: docker push your-dockerhub-username/product-catalogue:v1.0.0
+
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f kubernetes/namespace-v1.yaml
+        kubectl apply -f kubernetes/deployment-v1.yaml
+        kubectl apply -f kubernetes/service-v1.yaml
+        kubectl apply -f kubernetes/hpa-v1.yaml
+        kubectl apply -f kubernetes/ingress.yaml
