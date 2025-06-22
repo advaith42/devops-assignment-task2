@@ -26,10 +26,10 @@ jobs:
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
     - name: Build Docker image
-      run: docker build -t your-dockerhub-username/product-catalogue:v1.0.0 ./microservice
+      run: docker build -t advaith65/product-catalogue:v1.0.0 ./microservice
 
     - name: Push Docker image
-      run: docker push your-dockerhub-username/product-catalogue:v1.0.0
+      run: docker push advaith65/product-catalogue:v1.0.0
 
     - name: Apply Kubernetes manifests
       run: |
