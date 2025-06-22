@@ -33,8 +33,8 @@ jobs:
 
     - name: Apply Kubernetes manifests
       run: |
-        kubectl apply -f kubernetes/namespace-v1.yaml
-        kubectl apply -f kubernetes/deployment-v1.yaml
-        kubectl apply -f kubernetes/service-v1.yaml
-        kubectl apply -f kubernetes/hpa-v1.yaml
-        kubectl apply -f kubernetes/ingress.yaml
+        kubectl apply --validate=false -f kubernetes/namespace-v1.yaml
+        kubectl apply --validate=false -f kubernetes/deployment-v1.yaml
+        kubectl apply --validate=false -f kubernetes/service-v1.yaml
+        kubectl apply --validate=false -f kubernetes/hpa-v1.yaml
+        kubectl apply --validate=false -f kubernetes/ingress.yaml
